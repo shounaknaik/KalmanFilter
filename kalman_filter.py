@@ -3,7 +3,7 @@ import numpy as np
 from kalman_functions import load_data, get_mean_diff_time,kalman_filter
 import pdb
 
-fig, axs = plt.subplots(2, 2, figsize=(12, 10), subplot_kw={'projection': '3d'})
+fig, axs = plt.subplots(3,1, figsize=(12, 10), subplot_kw={'projection': '3d'})
 
 
 def run_kalman(filename):
@@ -25,14 +25,22 @@ def run_kalman(filename):
 
     return estimates
 
+ ####################################################################
+
+gt_track = run_kalman('kalman_filter_data_mocap.txt')
+
+
+####################################################################
 estimates = run_kalman('kalman_filter_data_high_noise.txt')
 
 #Plot estimated_path
-ax = axs[0,0]
-ax.plot(estimates[:, 0], estimates[:, 1], estimates[:, 2])
+ax = axs[0]
+ax.plot(estimates[:, 0], estimates[:, 1], estimates[:, 2],color='b',label = "Estimated")
+ax.scatter(gt_track[:,0],gt_track[:,1],gt_track[:,2],color='g', label = "Ground truth", s= 5)
 ax.set_xlabel('X')
 ax.set_ylabel('Y')
 ax.set_zlabel('Z')
+ax.legend()
 ax.set_title('Estimated trajectory for high noise')
  ####################################################################
 
@@ -40,38 +48,28 @@ ax.set_title('Estimated trajectory for high noise')
 estimates = run_kalman('kalman_filter_data_low_noise.txt')
 
 #Plot estimated_path
-ax = axs[0,1]
-ax.plot(estimates[:, 0], estimates[:, 1], estimates[:, 2])
+ax = axs[1]
+ax.plot(estimates[:, 0], estimates[:, 1], estimates[:, 2],color='b',label = "Estimated")
+ax.scatter(gt_track[:,0],gt_track[:,1],gt_track[:,2],color='g', label = "Ground truth",s= 5)
 ax.set_xlabel('X')
 ax.set_ylabel('Y')
 ax.set_zlabel('Z')
+ax.legend()
 ax.set_title('Estimated trajectory for low noise')
- ####################################################################
-
-estimates = run_kalman('kalman_filter_data_mocap.txt')
-
-#Plot estimated_path
-ax = axs[1,0]
-ax.plot(estimates[:, 0], estimates[:, 1], estimates[:, 2])
-ax.set_xlabel('X')
-ax.set_ylabel('Y')
-ax.set_zlabel('Z')
-ax.set_title('Estimated trajectory for motion capture system')
 
  ####################################################################
 
 estimates = run_kalman('kalman_filter_data_velocity.txt')
 
 #Plot estimated_path
-ax = axs[1,1]
-ax.plot(estimates[:, 0], estimates[:, 1], estimates[:, 2])
+ax = axs[2]
+ax.plot(estimates[:, 0], estimates[:, 1], estimates[:, 2],color='b',label = "Estimated")
+ax.scatter(gt_track[:,0],gt_track[:,1],gt_track[:,2],color='g', label = "Ground truth", s= 5)
 ax.set_xlabel('X')
 ax.set_ylabel('Y')
 ax.set_zlabel('Z')
+ax.legend()
 ax.set_title('Estimated trajectory for velocity')
-
-
-
 
 
 plt.show()
