@@ -160,8 +160,11 @@ R = σ^2 * I
 where **σ** ranges from 0.1 to 1.0 in this case.
 
 ## Results
-
-<figure>
-  <img src="./Output.png" alt="Drone Track">
-  <figcaption style="text-align: center;">Drone Tracking by Kalman Filter</figcaption>
-</figure>
+<table>
+  <tr>
+      <td align = "center"> <img src="./Output.png"> </td>
+  </tr>
+  <tr>
+      <td align = "center"> Drone Tracking by Kalman Filter </td>
+  </tr>
+</table>
